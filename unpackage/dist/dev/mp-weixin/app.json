@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#dbdbdb",
+    "selectedColor": "#1296db",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/mainPage.png",
+        "selectedIconPath": "static/tabBar/selectedMainPage.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/search.png",
+        "selectedIconPath": "static/tabBar/selectedSearch.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/shopping.png",
+        "selectedIconPath": "static/tabBar/selectedShopping.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/mine.png",
+        "selectedIconPath": "static/tabBar/selectedMine.png",
+        "text": "组件"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
