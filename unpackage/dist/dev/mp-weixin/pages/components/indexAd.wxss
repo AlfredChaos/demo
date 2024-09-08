@@ -1,0 +1,23 @@
+
+.indexAd{
+		display: flex;
+		margin-top: 20rpx;
+}
+.indexAdLeft{
+		width: 50%;
+		height: 520rpx;
+}
+.indexAdLeft image{
+		width: 100%;
+		height: 520rpx;
+}
+.indexAdRight{
+		width: 50%;
+}
+.indexAdRight image{
+		width: 100%;
+		height: 260rpx;
+}
+.indexAdRightItem{
+		height: 260rpx;
+}

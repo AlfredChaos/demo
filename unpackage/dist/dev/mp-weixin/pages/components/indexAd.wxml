@@ -1,0 +1,1 @@
+<view class="indexAd"><view class="indexAdLeft"><image src="{{a}}" mode=""></image></view><view class="indexAdRight"><view class="indexAdRightItem"><image src="{{b}}" mode=""></image></view><view class="indexAdRightItem"><image src="{{c}}" mode=""></image></view></view></view>

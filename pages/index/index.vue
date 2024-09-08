@@ -1,20 +1,41 @@
 <template>
 	<view class="content">
-		<view class="status"></view>
 		
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+		<!-- 顶部导航 -->
+		<topNavigation></topNavigation>
+		<!-- 首页轮播 -->
+		<indexSwiper></indexSwiper>
+		<!-- 商品服务和商品导航 -->
+		<indexService></indexService>
+		<!-- 首页广告 -->
+		<indexAd></indexAd>
+		<view class="floor">
+			<titleVue name="智能手机"></titleVue>
+			<image src="../../static/ad/cate1Ad.jpg"  class="adImage" mode=""></image>
 		</view>
+		
+		
 	</view>
 </template>
 
 <script>
+	import topNavigation from '../components/topNavigation.vue'
+	import indexSwiper from '../components/indexSwiper.vue'
+	import indexService from '../components/indexService.vue'
+	import indexAd from '../components/indexAd.vue'
+	import titleVue from '../components/title.vue'
 	export default {
 		data() {
 			return {
 				title: 'Hello'
 			}
+		},
+		components: {
+			topNavigation,
+			indexSwiper,
+			indexService,
+			indexAd,
+			titleVue
 		},
 		onLoad() {
 
@@ -26,35 +47,12 @@
 </script>
 
 <style>
-	/* .content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	page{
+		background: #f4f4f4;
 	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	} */
-	
-	.status{
-		background-color: aqua;
-		height: var(--status-bar-height);
+	.adImage{
+		height: 344rpx;
 		width: 100%;
 	}
+	
 </style>

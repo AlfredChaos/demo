@@ -1,0 +1,1 @@
+<view class="floorTitle"><view class="title">{{a}}</view><view class="line"></view></view>

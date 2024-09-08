@@ -1,4 +1,11 @@
 {
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {}
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-navigation": "../components/topNavigation",
+    "index-swiper": "../components/indexSwiper",
+    "index-service": "../components/indexService",
+    "index-ad": "../components/indexAd",
+    "title-vue": "../components/title"
+  }
 }
