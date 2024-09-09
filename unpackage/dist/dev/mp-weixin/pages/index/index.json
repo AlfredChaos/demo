@@ -6,6 +6,8 @@
     "index-swiper": "../components/indexSwiper",
     "index-service": "../components/indexService",
     "index-ad": "../components/indexAd",
-    "title-vue": "../components/title"
+    "title-vue": "../components/title",
+    "shop-item": "../components/shopItem",
+    "index-table": "../components/indexTable"
   }
 }

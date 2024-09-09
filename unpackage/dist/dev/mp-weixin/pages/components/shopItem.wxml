@@ -1,0 +1,1 @@
+<view class="shopListItem"><image src="{{a}}" class="shopImg" mode=""></image><view class="shopTitle"> 魅族 16s Pro </view><view class="shopActive"><view class="shopActiveLab"> 免息 </view><view class="shopActiveText"> 4800W AI三摄 屏幕下方屏幕下方 </view></view><view class="shopPrice"> ¥2699.00 </view></view>
