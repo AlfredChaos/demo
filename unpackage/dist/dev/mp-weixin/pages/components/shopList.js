@@ -7,8 +7,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($props.content, (item, index, i0) => {
       return {
-        a: this.$imgUrl + item.image,
-        b: index
+        a: this.$imgUrl + item.mainimage,
+        b: common_vendor.t(item.smalltitle),
+        c: common_vendor.t(item.summary),
+        d: common_vendor.t(item.price),
+        e: index
       };
     })
   };

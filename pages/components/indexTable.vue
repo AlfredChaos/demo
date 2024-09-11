@@ -1,39 +1,42 @@
 <template>
 	<view class="floorTable">
 		<view class="tableItem">
-			<image src="../../static/shopNav/cateRecommend1.jpg"  mode=""></image>
+			<image :src="this.$imgUrl+content[0].img"  mode=""></image>
 		</view>
 		<view class="tableItem" style="background: #7064ca;">
 			<view class="tableBigTitle">
-				MEIZU UR 高端定制耳机 预约
+				{{content[0].name}}
 			</view>
 			<view class="tableSmallTitle">
-				预约专用私人定制，为你而声预约专用私人定制为你而声预约专用私人定制
+				{{content[0].summary}}
 			</view>
 			<view class="tableLine"></view>
 			<view class="tablePrice">
-				¥ 200
+				¥{{content[0].price}}
 			</view>
 		</view>
 		<view class="tableItem" style="background: #f65c5c;">
 			<view class="tableBigTitle">
-				MEIZU UR 高端定制耳机 预约
+				{{content[1].name}}
 			</view>
 			<view class="tableSmallTitle">
-				预约专用私人定制，为你而声预约专用私人定制为你而声预约专用私人定制
+				{{content[1].summary}}
 			</view>
 			<view class="tableLine"></view>
 			<view class="tablePrice">
-				¥ 200
+				¥{{content[1].price}}
 			</view>
 		</view>
 		<view class="tableItem">
-			<image src="../../static/shopNav/cateRecommend2.jpg"  mode=""></image>
+			<image :src="this.$imgUrl+content[1].img"  mode=""></image>
 		</view>
 	</view>
 </template>
 
 <script>
+	export default{
+		props: ['content']
+	}
 </script>
 
 <style>

@@ -20,6 +20,7 @@ const _sfc_main = {
 };
 function createApp() {
   const app = common_vendor.createSSRApp(_sfc_main);
+  app.config.globalProperties.$imgUrl = "http://www.mall.com/uploads/";
   return {
     app
   };

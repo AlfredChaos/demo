@@ -10,11 +10,4 @@ page{
 		height: 344rpx;
 		width: 100%;
 }
-.shopList{
-		display: flex;
-		justify-content: space-between;
-		/* 换行 */
-		flex-wrap: wrap;
-}
-	
-	
+

@@ -1,4 +1,10 @@
 
+.shopList{
+		display: flex;
+		justify-content: space-between;
+		/* 换行 */
+		flex-wrap: wrap;
+}
 .shopListItem{
 		width: 370rpx;
 		height: 540rpx;

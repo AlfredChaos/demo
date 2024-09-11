@@ -1,27 +1,39 @@
 <template>
-	<view class="shopListItem">
-		<image src="../../static/commodity/p1.png" class="shopImg" mode=""></image>
-		<view class="shopTitle">
-			魅族 16s Pro
-		</view>
-		<view class="shopActive">
-			<view class="shopActiveLab">
-				免息
+	<view class="shopList">
+		<view class="shopListItem" v-for="(item,index) in content" :key="index">
+			<image :src="this.$imgUrl+item.mainimage" class="shopImg" mode=""></image>
+			<view class="shopTitle">
+				{{item.smalltitle}}
 			</view>
-			<view class="shopActiveText">
-				4800W AI三摄 屏幕下方屏幕下方
+			<view class="shopActive">
+				<view class="shopActiveLab">
+					免息
+				</view>
+				<view class="shopActiveText">
+					{{item.summary}}
+				</view>
 			</view>
-		</view>
-		<view class="shopPrice">
-			¥2699.00
+			<view class="shopPrice">
+				¥{{item.price}}
+			</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
+	export default{
+		props: ['content']
+	}
 </script>
 
 <style>
+	.shopList{
+		display: flex;
+		justify-content: space-between;
+		/* 换行 */
+		flex-wrap: wrap;
+	}
 	.shopListItem{
 		width: 370rpx;
 		height: 540rpx;

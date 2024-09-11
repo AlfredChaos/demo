@@ -6,40 +6,21 @@
 		<!-- 首页轮播 -->
 		<indexSwiper :content="banner"></indexSwiper>
 		<!-- 商品服务和商品导航 -->
-		<indexService></indexService>
+		<indexService :active="active" :icon="icon"></indexService>
 		<!-- 首页广告 -->
-		<indexAd></indexAd>
-		<view class="floor">
-			<titleVue name="智能手机"></titleVue>
-			<view class="adImage">
-				<image src="../../static/ad/cate1Ad.jpg"  class="adImage" mode=""></image>
-			</view>
-			<view class="shopList">
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-			</view>
-		</view>
-		<view class="floor">
-			<titleVue name="魅族声乐"></titleVue>
-			<indexTable></indexTable>
-			<view class="shopList">
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-			</view>
-		</view>
-		<view class="floor">
-			<titleVue name="智能配件"></titleVue>
-			<indexTable></indexTable>
-			<view class="shopList">
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-				<shopItem></shopItem>
-			</view>
+		<indexAd :content="ad"></indexAd>
+		<view class="floor" v-for="(item,index) in floor" :key="index">
+			<titleVue :name="item.content[0].title"></titleVue>
+			<template v-if="item.content.length==1">
+				<view class="adImage">
+					<image :src="this.$imgUrl+item.content[0].img"  class="adImage" mode=""></image>
+				</view>
+			</template>
+			<template v-else>
+				<indexTable :content="item.content"></indexTable>
+			</template>
+			
+			<shopList :content="item.product"></shopList>
 		</view>
 		
 	</view>
@@ -51,7 +32,7 @@
 	import indexService from '../components/indexService.vue'
 	import indexAd from '../components/indexAd.vue'
 	import titleVue from '../components/title.vue'
-	import shopItem from '../components/shopItem.vue'
+	import shopList from '../components/shopList.vue'
 	import indexTable from '../components/indexTable.vue'
 	export default {
 		data() {
@@ -59,7 +40,11 @@
 				// 轮播图
 				banner: [],
 				// 顶部推荐分类
-				recommend_cate: []
+				recommend_cate: [],
+				active: [],
+				icon: [],
+				ad: [],
+				floor: [],
 			}
 		},
 		components: {
@@ -68,7 +53,7 @@
 			indexService,
 			indexAd,
 			titleVue,
-			shopItem,
+			shopList,
 			indexTable
 		},
 		onLoad() {
@@ -77,12 +62,18 @@
 		methods: {
 			getData(){
 				uni.request({
-				    url: 'http://www.mall.com/api/index', //仅为示例，并非真实接口地址。
+					// mumu模拟器
+				    // url: 'http://192.168.5.9:80/mall/public/api/index', //仅为示例，并非真实接口地址。
+					url: 'http://www.mall.com/api/index',
 				    success: (res) => {
 				        console.log(res.data.data);
 						var data = res.data.data;
 						this.recommend_cate = data.recommend_cate;
 						this.banner = data.banner;
+						this.active = data.active;
+						this.icon = data.icon;
+						this.ad = data.floor;
+						this.floor = data.cate;
 				    }
 				});
 			}
@@ -102,12 +93,5 @@
 		height: 344rpx;
 		width: 100%;
 	}
-	.shopList{
-		display: flex;
-		justify-content: space-between;
-		/* 换行 */
-		flex-wrap: wrap;
-	}
-	
-	
+
 </style>

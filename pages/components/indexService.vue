@@ -1,39 +1,24 @@
 <template>
 	<view class="service">
-		<view class="serviceItem">
-			<image src="../../static/service/icon1.png"></image>
-			魅族官网直供
-		</view>
-		<view class="serviceItem">
-			<image src="../../static/service/icon2.png"></image>
-			满80免运费
-		</view>
-		<view class="serviceItem">
-			<image src="../../static/service/icon3.png"></image>
-			7天无理由退货
+		<view class="serviceItem" v-for="(item,index) in active" :key="index">
+			<image :src="this.$imgUrl+item.image" mode=""></image>
+			{{item.title}}
 		</view>
 	</view>
 	<view class="shopNav">
-		<view class="shopNavItem">
-			<image src="../../static/shopNav/recommend1.png"></image>
-			<text>魅族 16S PRO</text>
-		</view>
-		<view class="shopNavItem">
-			<image src="../../static/shopNav/recommend2.png"></image>
-			<text>魅族 16S PRO</text>
-		</view>
-		<view class="shopNavItem">
-			<image src="../../static/shopNav/recommend3.jpg"></image>
-			<text>魅族 16S PRO</text>
-		</view>
-		<view class="shopNavItem">
-			<image src="../../static/shopNav/recommend4.jpg"></image>
-			<text>魅族 16S PRO</text>
+		<view class="shopNavItem" v-for="(item,index) in icon" :key="index">
+			<navigator url="#" hover-class="none">
+				<image :src="this.$imgUrl+item.image" mode=""></image>
+				<text>{{item.title}}</text>
+			</navigator>
 		</view>
 	</view>
 </template>
 
 <script>
+	export default{
+		props: ["active", "icon"]
+	}
 </script>
 
 <style>
@@ -72,7 +57,8 @@
 	.shopNavItem image{
 		width: 100rpx;
 		height: 100rpx;
-		margin-top: 30rpx;
+		display: block;
+		margin: 30rpx auto 0;
 	}
 	.shopNavItem text{
 		display: block;

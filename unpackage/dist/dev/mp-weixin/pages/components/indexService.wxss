@@ -34,7 +34,8 @@
 .shopNavItem image{
 		width: 100rpx;
 		height: 100rpx;
-		margin-top: 30rpx;
+		display: block;
+		margin: 30rpx auto 0;
 }
 .shopNavItem text{
 		display: block;

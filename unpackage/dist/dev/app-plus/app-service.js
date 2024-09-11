@@ -31,9 +31,16 @@ if (uni.restoreGlobal) {
 }
 (function(vue) {
   "use strict";
-  const _imports_0$6 = "/static/topNavigation/search.png";
-  const _imports_1$4 = "/static/topNavigation/logo.png";
-  const _imports_2$3 = "/static/topNavigation/shopping.png";
+  function formatAppLog(type, filename, ...args) {
+    if (uni.__log__) {
+      uni.__log__(type, filename, ...args);
+    } else {
+      console[type].apply(console, [...args, filename]);
+    }
+  }
+  const _imports_0$4 = "/static/topNavigation/search.png";
+  const _imports_1$2 = "/static/topNavigation/logo.png";
+  const _imports_2$1 = "/static/topNavigation/shopping.png";
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -41,8 +48,10 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$b = {};
-  function _sfc_render$a(_ctx, _cache) {
+  const _sfc_main$b = {
+    props: ["content"]
+  };
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
@@ -52,29 +61,43 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "navbar" }, [
             vue.createElementVNode("view", { class: "search" }, [
               vue.createElementVNode("image", {
-                src: _imports_0$6,
+                src: _imports_0$4,
                 mode: ""
               })
             ]),
             vue.createElementVNode("view", { class: "logo" }, [
               vue.createElementVNode("image", {
-                src: _imports_1$4,
+                src: _imports_1$2,
                 mode: ""
               })
             ]),
             vue.createElementVNode("view", { class: "shopping" }, [
               vue.createElementVNode("image", {
-                src: _imports_2$3,
+                src: _imports_2$1,
                 mode: ""
               })
             ])
           ]),
           vue.createElementVNode("view", { class: "menuTab" }, [
             vue.createElementVNode("view", { class: "menuTabItem menuActive" }, " 推荐 "),
-            vue.createElementVNode("view", { class: "menuTabItem" }, " 手机 "),
-            vue.createElementVNode("view", { class: "menuTabItem" }, " 声学 "),
-            vue.createElementVNode("view", { class: "menuTabItem" }, " 配件 "),
-            vue.createElementVNode("view", { class: "menuTabItem" }, " 生活 ")
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList($props.content, (item, index) => {
+                return vue.openBlock(), vue.createElementBlock(
+                  "view",
+                  {
+                    class: "menuTabItem",
+                    key: index
+                  },
+                  vue.toDisplayString(item.catename),
+                  1
+                  /* TEXT */
+                );
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
           ])
         ]),
         vue.createElementVNode("view", { class: "headerEmpty" })
@@ -84,12 +107,10 @@ if (uni.restoreGlobal) {
     );
   }
   const topNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-f86995bb"], ["__file", "D:/develop/code/uniapp-demo/demo/pages/components/topNavigation.vue"]]);
-  const _imports_0$5 = "/static/banner/banner1.jpg";
-  const _imports_1$3 = "/static/banner/banner2.jpg";
-  const _imports_2$2 = "/static/banner/banner3.jpg";
-  const _imports_3$1 = "/static/banner/banner4.jpg";
-  const _sfc_main$a = {};
-  function _sfc_render$9(_ctx, _cache) {
+  const _sfc_main$a = {
+    props: ["content"]
+  };
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("swiper", {
       class: "swiper",
       "indicator-dots": true,
@@ -97,85 +118,86 @@ if (uni.restoreGlobal) {
       interval: 3e3,
       duration: 1e3
     }, [
-      vue.createElementVNode("swiper-item", null, [
-        vue.createElementVNode("view", { class: "swiper-item" }, [
-          vue.createElementVNode("image", {
-            src: _imports_0$5,
-            mode: ""
-          })
-        ])
-      ]),
-      vue.createElementVNode("swiper-item", null, [
-        vue.createElementVNode("view", { class: "swiper-item" }, [
-          vue.createElementVNode("image", {
-            src: _imports_1$3,
-            mode: ""
-          })
-        ])
-      ]),
-      vue.createElementVNode("swiper-item", null, [
-        vue.createElementVNode("view", { class: "swiper-item" }, [
-          vue.createElementVNode("image", {
-            src: _imports_2$2,
-            mode: ""
-          })
-        ])
-      ]),
-      vue.createElementVNode("swiper-item", null, [
-        vue.createElementVNode("view", { class: "swiper-item" }, [
-          vue.createElementVNode("image", {
-            src: _imports_3$1,
-            mode: ""
-          })
-        ])
-      ])
+      (vue.openBlock(true), vue.createElementBlock(
+        vue.Fragment,
+        null,
+        vue.renderList($props.content, (item, index) => {
+          return vue.openBlock(), vue.createElementBlock("swiper-item", { key: index }, [
+            vue.createElementVNode("view", { class: "swiper-item" }, [
+              vue.createElementVNode("navigator", { url: "#" }, [
+                vue.createElementVNode("image", {
+                  src: this.$imgUrl + item.image,
+                  mode: ""
+                }, null, 8, ["src"])
+              ])
+            ])
+          ]);
+        }),
+        128
+        /* KEYED_FRAGMENT */
+      ))
     ]);
   }
   const indexSwiper = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-77cdc92d"], ["__file", "D:/develop/code/uniapp-demo/demo/pages/components/indexSwiper.vue"]]);
-  const _imports_0$4 = "/static/service/icon1.png";
-  const _imports_1$2 = "/static/service/icon2.png";
-  const _imports_2$1 = "/static/service/icon3.png";
-  const _imports_3 = "/static/shopNav/recommend1.png";
-  const _imports_4 = "/static/shopNav/recommend2.png";
-  const _imports_5 = "/static/shopNav/recommend3.jpg";
-  const _imports_6 = "/static/shopNav/recommend4.jpg";
-  const _sfc_main$9 = {};
-  function _sfc_render$8(_ctx, _cache) {
+  const _sfc_main$9 = {
+    props: ["active", "icon"]
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       vue.Fragment,
       null,
       [
         vue.createElementVNode("view", { class: "service" }, [
-          vue.createElementVNode("view", { class: "serviceItem" }, [
-            vue.createElementVNode("image", { src: _imports_0$4 }),
-            vue.createTextVNode(" 魅族官网直供 ")
-          ]),
-          vue.createElementVNode("view", { class: "serviceItem" }, [
-            vue.createElementVNode("image", { src: _imports_1$2 }),
-            vue.createTextVNode(" 满80免运费 ")
-          ]),
-          vue.createElementVNode("view", { class: "serviceItem" }, [
-            vue.createElementVNode("image", { src: _imports_2$1 }),
-            vue.createTextVNode(" 7天无理由退货 ")
-          ])
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($props.active, (item, index) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "serviceItem",
+                key: index
+              }, [
+                vue.createElementVNode("image", {
+                  src: this.$imgUrl + item.image,
+                  mode: ""
+                }, null, 8, ["src"]),
+                vue.createTextVNode(
+                  " " + vue.toDisplayString(item.title),
+                  1
+                  /* TEXT */
+                )
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
         ]),
         vue.createElementVNode("view", { class: "shopNav" }, [
-          vue.createElementVNode("view", { class: "shopNavItem" }, [
-            vue.createElementVNode("image", { src: _imports_3 }),
-            vue.createElementVNode("text", null, "魅族 16S PRO")
-          ]),
-          vue.createElementVNode("view", { class: "shopNavItem" }, [
-            vue.createElementVNode("image", { src: _imports_4 }),
-            vue.createElementVNode("text", null, "魅族 16S PRO")
-          ]),
-          vue.createElementVNode("view", { class: "shopNavItem" }, [
-            vue.createElementVNode("image", { src: _imports_5 }),
-            vue.createElementVNode("text", null, "魅族 16S PRO")
-          ]),
-          vue.createElementVNode("view", { class: "shopNavItem" }, [
-            vue.createElementVNode("image", { src: _imports_6 }),
-            vue.createElementVNode("text", null, "魅族 16S PRO")
-          ])
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($props.icon, (item, index) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "shopNavItem",
+                key: index
+              }, [
+                vue.createElementVNode("navigator", { url: "#" }, [
+                  vue.createElementVNode("image", {
+                    src: this.$imgUrl + item.image,
+                    mode: ""
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode(
+                    "text",
+                    null,
+                    vue.toDisplayString(item.title),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
         ])
       ],
       64
@@ -288,7 +310,12 @@ if (uni.restoreGlobal) {
   const _sfc_main$4 = {
     data() {
       return {
-        title: "Hello"
+        // 轮播图
+        banner: [],
+        // 顶部推荐分类
+        recommend_cate: [],
+        active: [],
+        icon: []
       };
     },
     components: {
@@ -301,8 +328,25 @@ if (uni.restoreGlobal) {
       indexTable
     },
     onLoad() {
+      this.getData();
     },
-    methods: {}
+    methods: {
+      getData() {
+        uni.request({
+          // mumu模拟器
+          // url: 'http://192.168.5.9:80/mall/public/api/index', //仅为示例，并非真实接口地址。
+          url: "http://www.mall.com/api/index",
+          success: (res) => {
+            formatAppLog("log", "at pages/index/index.vue:86", res.data.data);
+            var data = res.data.data;
+            this.recommend_cate = data.recommend_cate;
+            this.banner = data.banner;
+            this.active = data.active;
+            this.icon = data.icon;
+          }
+        });
+      }
+    }
   };
   function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_topNavigation = vue.resolveComponent("topNavigation");
@@ -314,11 +358,14 @@ if (uni.restoreGlobal) {
     const _component_indexTable = vue.resolveComponent("indexTable");
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createCommentVNode(" 顶部导航 "),
-      vue.createVNode(_component_topNavigation),
+      vue.createVNode(_component_topNavigation, { content: $data.recommend_cate }, null, 8, ["content"]),
       vue.createCommentVNode(" 首页轮播 "),
-      vue.createVNode(_component_indexSwiper),
+      vue.createVNode(_component_indexSwiper, { content: $data.banner }, null, 8, ["content"]),
       vue.createCommentVNode(" 商品服务和商品导航 "),
-      vue.createVNode(_component_indexService),
+      vue.createVNode(_component_indexService, {
+        active: $data.active,
+        icon: $data.icon
+      }, null, 8, ["active", "icon"]),
       vue.createCommentVNode(" 首页广告 "),
       vue.createVNode(_component_indexAd),
       vue.createElementVNode("view", { class: "floor" }, [
@@ -379,13 +426,6 @@ if (uni.restoreGlobal) {
   __definePage("pages/components/search/search", PagesComponentsSearchSearch);
   __definePage("pages/components/shopping/shopping", PagesComponentsShoppingShopping);
   __definePage("pages/components/mine/mine", PagesComponentsMineMine);
-  function formatAppLog(type, filename, ...args) {
-    if (uni.__log__) {
-      uni.__log__(type, filename, ...args);
-    } else {
-      console[type].apply(console, [...args, filename]);
-    }
-  }
   const _sfc_main = {
     onLaunch: function() {
       formatAppLog("log", "at App.vue:4", "App Launch");
@@ -400,6 +440,7 @@ if (uni.restoreGlobal) {
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/develop/code/uniapp-demo/demo/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
+    app.config.globalProperties.$imgUrl = "http://www.mall.com/uploads";
     return {
       app
     };

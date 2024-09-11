@@ -1,0 +1,1 @@
+<view class="shopList"><view wx:for="{{a}}" wx:for-item="item" wx:key="e" class="shopListItem"><image src="{{item.a}}" class="shopImg" mode=""></image><view class="shopTitle">{{item.b}}</view><view class="shopActive"><view class="shopActiveLab"> 免息 </view><view class="shopActiveText">{{item.c}}</view></view><view class="shopPrice"> ¥{{item.d}}</view></view></view>

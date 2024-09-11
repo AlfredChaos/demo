@@ -7,7 +7,7 @@
     "index-service": "../components/indexService",
     "index-ad": "../components/indexAd",
     "title-vue": "../components/title",
-    "shop-item": "../components/shopItem",
+    "shop-list": "../components/shopList",
     "index-table": "../components/indexTable"
   }
 }
