@@ -16,17 +16,8 @@
 			<view class="menuTabItem menuActive">
 				推荐
 			</view>
-			<view class="menuTabItem">
-				手机
-			</view>
-			<view class="menuTabItem">
-				声学
-			</view>
-			<view class="menuTabItem">
-				配件
-			</view>
-			<view class="menuTabItem">
-				生活
+			<view class="menuTabItem" v-for="(item,index) in content" :key="index">
+				{{item.catename}}
 			</view>
 		</view>
 	</view>
@@ -34,6 +25,9 @@
 </template>
 
 <script>
+	export default{
+		props: ['content']
+	}
 </script>
 
 <style>

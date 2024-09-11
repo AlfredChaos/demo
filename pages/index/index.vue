@@ -2,9 +2,9 @@
 	<view class="content">
 		
 		<!-- 顶部导航 -->
-		<topNavigation></topNavigation>
+		<topNavigation :content="recommend_cate"></topNavigation>
 		<!-- 首页轮播 -->
-		<indexSwiper></indexSwiper>
+		<indexSwiper :content="banner"></indexSwiper>
 		<!-- 商品服务和商品导航 -->
 		<indexService></indexService>
 		<!-- 首页广告 -->
@@ -56,7 +56,10 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				// 轮播图
+				banner: [],
+				// 顶部推荐分类
+				recommend_cate: []
 			}
 		},
 		components: {
@@ -69,10 +72,20 @@
 			indexTable
 		},
 		onLoad() {
-
+			this.getData();
 		},
 		methods: {
-
+			getData(){
+				uni.request({
+				    url: 'http://www.mall.com/api/index', //仅为示例，并非真实接口地址。
+				    success: (res) => {
+				        console.log(res.data.data);
+						var data = res.data.data;
+						this.recommend_cate = data.recommend_cate;
+						this.banner = data.banner;
+				    }
+				});
+			}
 		}
 	}
 </script>

@@ -4,30 +4,20 @@
 	:autoplay="true" 
 	:interval="3000" 
 	:duration="1000">
-		<swiper-item>
+		<swiper-item v-for="(item,index) in content" :key="index">
 			<view class="swiper-item">
-				<image src="../../static/banner/banner1.jpg" mode=""></image>
-			</view>
-		</swiper-item>
-		<swiper-item>
-			<view class="swiper-item">
-				<image src="../../static/banner/banner2.jpg" mode=""></image>
-			</view>
-		</swiper-item>
-		<swiper-item>
-			<view class="swiper-item">
-				<image src="../../static/banner/banner3.jpg" mode=""></image>
-			</view>
-		</swiper-item>
-		<swiper-item>
-			<view class="swiper-item">
-				<image src="../../static/banner/banner4.jpg" mode=""></image>
+				<navigator url="#">
+					<image :src="this.$imgUrl+item.image" mode=""></image>
+				</navigator>
 			</view>
 		</swiper-item>
 	</swiper>
 </template>
 
 <script>
+	export default{
+		props: ['content']
+	}
 </script>
 
 <style>

@@ -15,6 +15,8 @@ app.$mount()
 import { createSSRApp } from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
+  // 设置全局变量
+  app.config.globalProperties.$imgUrl = "http://www.mall.com/uploads/"
   return {
     app
   }
