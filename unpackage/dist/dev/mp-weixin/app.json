@@ -1,11 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/components/search/search",
     "pages/components/shopping/shopping",
-    "pages/components/mine/mine"
+    "pages/components/mine/mine",
+    "pages/cate/cate"
   ],
   "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
@@ -21,7 +24,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/components/search/search",
+        "pagePath": "pages/cate/cate",
         "iconPath": "static/tabBar/search.png",
         "selectedIconPath": "static/tabBar/selectedSearch.png",
         "text": "分类"

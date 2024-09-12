@@ -8,12 +8,6 @@
 			}
 		},
 		{
-			"path": "pages/components/search/search",
-			"style": {
-				"navigationBarTitleText": "search"
-			}
-		},
-		{
 			"path": "pages/components/shopping/shopping",
 			"style": {
 				"navigationBarTitleText": "shopping"
@@ -24,12 +18,19 @@
 			"style": {
 				"navigationBarTitleText": "mine"
 			}
+		},
+		{
+			"path" : "pages/cate/cate",
+			"style" : 
+			{
+				"navigationBarTitleText" : "分类"
+			}
 		}
 	],
 	"globalStyle": {
-		// "navigationBarTextStyle": "black",
-		// "navigationBarTitleText": "uni-app",
-		// "navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {},
@@ -44,7 +45,7 @@
 			"selectedIconPath": "static/tabBar/selectedMainPage.png",
 			"text": "首页"
 		}, {
-			"pagePath": "pages/components/search/search",
+			"pagePath": "pages/cate/cate",
 			"iconPath": "static/tabBar/search.png",
 			"selectedIconPath": "static/tabBar/selectedSearch.png",
 			"text": "分类"
