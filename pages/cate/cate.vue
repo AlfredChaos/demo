@@ -12,140 +12,28 @@
 		<view class="cate">
 			<view class="cateLeft">
 				<scroll-view class="cateNameList" scroll-y="true">
-					<view class="cateNameItem cateActive">
-						精品推荐1
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐2
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐3
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem cateActive">
-						精品推荐1
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐2
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐3
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem cateActive">
-						精品推荐1
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐2
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐3
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem cateActive">
-						精品推荐1
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐2
-						<view class="cateLine"></view>
-					</view>
-					<view class="cateNameItem">
-						精品推荐3
+					<view class="cateNameItem"
+					:class="{cateActive:index==current}"
+					v-for="(item,index) in cate" :key="index">
+						{{item.catename}}
 						<view class="cateLine"></view>
 					</view>
 				</scroll-view>
 			</view>
 			<view class="cateRight">
 				<scroll-view class="cateRightScroll" scroll-y="true">
-					<view class="cateItem">
+					<view class="cateItem"
+					v-for="(item,index) in cate" :key="index">
 						<view class="cateRightTitle">
-							——<text>精品推荐1</text>——
+							——<text>{{item.catename}}</text>——
 						</view>
 						<view class="cateRightList">
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p1.png" mode=""></image>
-								<text>手机一</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p2.png" mode=""></image>
-								<text>手机二</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p3.png" mode=""></image>
-								<text>手机三</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p4.png" mode=""></image>
-								<text>手机四</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p5.png" mode=""></image>
-								<text>手机五</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p6.png" mode=""></image>
-								<text>手机六</text>
+							<view class="cateRightItem"
+							v-for="(child,childIndex) in item.product" :key="childIndex">
+								<image :src="this.$imgUrl+child.mainimage" mode=""></image>
+								<text>{{child.smalltitle}}</text>
 							</view>
 						</view>
-						</view>
-					<view class="cateItem">
-						<view class="cateRightTitle">
-							——<text>精品推荐1</text>——
-						</view>
-						<view class="cateRightList">
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p1.png" mode=""></image>
-								<text>手机一</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p2.png" mode=""></image>
-								<text>手机二</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p3.png" mode=""></image>
-								<text>手机三</text>
-							</view>
-							<view class="cateRightItem">
-								<image src="../../static/commodity/p4.png" mode=""></image>
-								<text>手机四</text>
-							</view>
-						</view>
-						
-					</view>
-					<view class="cateItem">
-						<view class="cateRightTitle">
-								——<text>精品推荐1</text>——
-							</view>
-							<view class="cateRightList">
-								<view class="cateRightItem">
-									<image src="../../static/commodity/p1.png" mode=""></image>
-									<text>手机一</text>
-								</view>
-								<view class="cateRightItem">
-									<image src="../../static/commodity/p2.png" mode=""></image>
-									<text>手机二</text>
-								</view>
-								<view class="cateRightItem">
-									<image src="../../static/commodity/p3.png" mode=""></image>
-									<text>手机三</text>
-								</view>
-								<view class="cateRightItem">
-									<image src="../../static/commodity/p4.png" mode=""></image>
-									<text>手机四</text>
-								</view>
-								<view class="cateRightItem">
-									<image src="../../static/commodity/p5.png" mode=""></image>
-									<text>手机五</text>
-								</view>
-							</view>
-						
 					</view>
 					<view style="height: 50rpx;width: 100%;"></view>
 				</scroll-view>
@@ -159,7 +47,8 @@
 	export default {
 		data() {
 			return {
-				cate: []
+				cate: [],
+				current: 0
 			}
 		},
 		onLoad() {
