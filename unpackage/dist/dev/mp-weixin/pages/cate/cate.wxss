@@ -33,7 +33,7 @@ page{
 		top: 120rpx;
 		bottom: 0;
 		width: 100%;
-		background: red;
+		display: flex;
 }
 .cateLeft{
 		width: 200rpx;
@@ -64,4 +64,44 @@ page{
 .cateActive .cateLine{
 		background-color: #10b6e8;
 }
-	
+.cateRight{
+		width: 550rpx;
+		background: #ffffff;
+		height: 100%;
+}
+.cateRightScroll{
+		height: 100%;
+		overflow: auto;
+}
+.cateRightTitle{
+		line-height: 86rpx;
+		padding-top: 16rpx;
+		color: #999999;
+		font-size: 28rpx;
+		text-align: center;
+}
+.cateRightTitle text{
+		padding: 0 30rpx;
+}
+.cateRightItem{
+		width: 33.33%;
+		float: left;
+		margin-top: 20rpx;
+}
+.cateRightItem image{
+		width: 160rpx;
+		height: 160rpx;
+		display: block;
+		margin: 0 auto;
+}
+.cateRightItem text{
+		line-height: 36rpx;
+		font-size: 24rpx;
+		text-align: center;
+		display: block;
+		width: 100%;
+}
+.cateRightList{
+		height: auto;
+		overflow: hidden;
+}
