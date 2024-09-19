@@ -11,19 +11,25 @@
 		
 		<view class="cate">
 			<view class="cateLeft">
-				<scroll-view class="cateNameList" scroll-y="true">
+				<scroll-view class="cateNameList" scroll-y="true"
+				:scroll-top="scrollTop">
 					<view class="cateNameItem"
 					:class="{cateActive:index==current}"
-					v-for="(item,index) in cate" :key="index">
+					v-for="(item,index) in cate" :key="index"
+					@click="menuTab(index)">
 						{{item.catename}}
 						<view class="cateLine"></view>
 					</view>
 				</scroll-view>
 			</view>
 			<view class="cateRight">
-				<scroll-view class="cateRightScroll" scroll-y="true">
+				<scroll-view class="cateRightScroll" scroll-y="true"
+				:scroll-into-view="'cate'+mainCurrent"
+				scroll-with-animation
+				@scroll="rightScroll">
 					<view class="cateItem"
-					v-for="(item,index) in cate" :key="index">
+					v-for="(item,index) in cate" :key="index"
+					:id="'cate'+index">
 						<view class="cateRightTitle">
 							——<text>{{item.catename}}</text>——
 						</view>
@@ -48,22 +54,65 @@
 		data() {
 			return {
 				cate: [],
-				current: 0
+				current: 0,
+				rectInfo: [],
+				mainCurrent: 0,
+				scrollTop: 0
 			}
 		},
 		onLoad() {
 			this.getData()
+		},
+		mounted() {
+			// 延时
+			setTimeout(()=>{
+				this.getRectInfo();
+				console.log(this.rectInfo);
+			},200)
 		},
 		methods: {
 			getData(){
 				uni.request({
 					url: "http://www.mall.com/api/index/cate",
 					success: res=>{
-						console.log(res.data.data),
 						this.cate = res.data.data
 					}
 				})
-			}
+			},
+			// 菜单选择
+			menuTab(index){
+				this.current = index;
+				this.mainCurrent = index;
+				this.scrollTop = index * 50;
+			},
+			// 获取矩形信息
+			getRectInfo(){
+				var temp = 0;
+				for(var i=0; i<this.cate.length; i++){
+					var rectIndex = 0;
+					let view = uni.createSelectorQuery().in(this).select("#cate"+i);
+					view.fields({
+						size: true,
+						rect: true
+					}, data=>{
+						var top = temp;
+						var bottom = temp + data.height;
+						temp += data.height;
+						this.rectInfo[rectIndex++] = {"top": top, "bottom": bottom};
+					}).exec();
+				}
+			},
+			// 滚动事件
+			rightScroll(e) {
+				var scrollTop = e.detail.scrollTop;
+				for(var i=0; i<this.rectInfo.length; i++) {
+					if(scrollTop > this.rectInfo[i].top && 
+					scrollTop < this.rectInfo[i].bottom) {
+						this.current = i;
+						this.scrollTop = i * 50;
+					}
+				}
+			},
 		}
 	}
 </script>
@@ -171,6 +220,9 @@
 		text-align: center;
 		display: block;
 		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.cateRightList{
 		height: auto;
