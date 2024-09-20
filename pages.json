@@ -25,6 +25,14 @@
 			{
 				"navigationBarTitleText" : "分类"
 			}
+		},
+		{
+			"path" : "pages/detail/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "商品详情",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
 		}
 	],
 	"globalStyle": {

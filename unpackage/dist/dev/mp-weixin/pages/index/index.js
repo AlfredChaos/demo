@@ -79,7 +79,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     e: common_vendor.f($data.floor, (item, index, i0) => {
       return common_vendor.e({
-        a: "7c857864-4-" + i0,
+        a: "f27585da-4-" + i0,
         b: common_vendor.p({
           name: item.content[0].title
         }),
@@ -87,12 +87,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, item.content.length == 1 ? {
         d: this.$imgUrl + item.content[0].img
       } : {
-        e: "7c857864-5-" + i0,
+        e: "f27585da-5-" + i0,
         f: common_vendor.p({
           content: item.content
         })
       }, {
-        g: "7c857864-6-" + i0,
+        g: "f27585da-6-" + i0,
         h: common_vendor.p({
           content: item.product
         }),
