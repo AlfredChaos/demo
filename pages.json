@@ -33,6 +33,13 @@
 				"navigationBarTitleText" : "商品详情",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
+		},
+		{
+			"path" : "pages/components/card/card",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 	"globalStyle": {
