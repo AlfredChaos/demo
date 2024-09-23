@@ -14,4 +14,14 @@
 
 <style>
 	/*每个页面公共css */
+	@font-face {
+		font-family: 'iconfont';
+		src: url('~@/static/font/iconfont.ttf') format('truetype');
+	}
+	.iconfont{
+		font-family: iconfont;
+	}
+	i{
+		font-style: normal;
+	}
 </style>

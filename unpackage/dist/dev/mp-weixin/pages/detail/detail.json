@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "商品详情",
+  "navigationBarBackgroundColor": "#ffffff",
   "usingComponents": {}
 }

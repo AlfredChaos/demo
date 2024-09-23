@@ -4,7 +4,8 @@
     "pages/components/shopping/shopping",
     "pages/components/mine/mine",
     "pages/cate/cate",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/components/card/card"
   ],
   "window": {
     "navigationBarTextStyle": "black",
