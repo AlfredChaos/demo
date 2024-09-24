@@ -5,8 +5,8 @@
 			<view class="contentTop">
 				<image :src="this.$imgUrl+image" mode=""></image>
 				<view class="contentTopText">
-					<text class="price">￥{{price}}</text>
-					<text class="attr">{{}}</text>
+					<text class="price">￥{{currentPrice}}</text>
+					<text class="attr">{{checkAttr}}</text>
 				</view>
 				<i class="iconfont" @click="closeDialog">&#xe62b;</i>
 			</view>
@@ -18,7 +18,9 @@
 					<view class="attrItemValue">
 						<!-- activeAttr -->
 						<view class="attrValueItem"
-						v-for="(child,childIndex) in item.value" :key="childIndex">
+						v-for="(child,childIndex) in item.value" :key="childIndex"
+						:class="{activeAttr:valueIndex[index]==childIndex}"
+						@click="attrCheck(index, childIndex)">
 							{{child}}
 						</view>
 					</view>
@@ -29,17 +31,17 @@
 					</view>
 					<view class="attrItemValue">
 						<view class="shopNumber">
-							<view class="button">-</view>
-							<view><input type="text" value="1" /></view>
-							<view class="button">+</view>
+							<view class="button" @click="reduce">-</view>
+							<view><input type="text" v-model="number" disabled=""/></view>
+							<view class="button" @click="add">+</view>
 						</view>
-						<text class="stock">（库存：5件）</text>
+						<text class="stock">（库存：{{stock}}件）</text>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="attrButton">
-			立即购买
+			{{buttonText}}
 		</view>
 	</view>
 	
@@ -49,13 +51,70 @@
 	export default {
 		data() {
 			return {
-				
+				valueIndex: [],
+				checkAttr: '',
+				currentPrice: '',
+				stock: '',
+				number: 1,
+				buttonText: ""
 			}
 		},
-		props:['image', 'price', 'attr', 'attrValue'],
+		mounted() {
+			for(var i=0; i<this.attr.length; i++){
+				this.valueIndex.push(0)
+			}
+			this.checkAttr = this.getValue().toString();
+			this.getPrice(this.getValue());
+			
+			if(this.type == 1){
+				this.buttonText = "加入购物车"
+			} else {
+				this.buttonText = "立即购买"
+			}
+		},
+		props:['image', 'price', 'attr', 'attrValue', 'type'],
 		methods: {
 			closeDialog(){
 				this.$emit('close')
+			},
+			attrCheck(index, childIndex){
+				this.valueIndex.splice(index, 1, childIndex);
+				var valueCheck = this.getValue();
+				this.checkAttr = valueCheck.toString();
+				this.getPrice(valueCheck);
+			},
+			getPrice(valueCheck){
+				var temp = []
+				for(var i=0; i<this.attrValue.length; i++){
+					if(this.attrValue[i]['attr_0'] == valueCheck[0] && this.attrValue[i]['attr_1'] == valueCheck[1]){
+						temp.push(this.attrValue[i]);
+					}
+				}
+				this.currentPrice = temp[0].price
+				this.stock = temp[0].stock
+			},
+			getValue(){
+				var temp = [];
+				for(var i=0; i<this.attr.length; i++) {
+					for(var j=0; j<this.attr[i].value.length; j++){
+						temp.push(this.attr[i].value[this.valueIndex[i]]);
+						break;
+					}
+				}
+				return temp;
+			},
+			reduce(){
+				if (this.number==1){
+					return;
+				}
+				this.number--
+			},
+			add(){
+				if(this.number >= this.stock){
+					this.number = this.stock;
+					return;
+				}
+				this.number++
 			}
 		}
 	}

@@ -29,7 +29,7 @@
 			</view>
 
 		</view>
-		<view class="shopAttr" @click="showAttr">
+		<view class="shopAttr" @click="showAttr(2)">
 			<label>规格</label><text>请选择商品规格尺寸</text>
 			<i class="iconfont">&#xe60b;</i>
 		</view>
@@ -97,18 +97,22 @@
 		<view class="detailBottom">
 			<view class="bottomItem">
 				<view class="bottomItemIndex">
-					<image src="../../static/tabbar1.png" mode=""></image>
-					<text>首页</text>
+					<navigator url="../index/index" hover-class="none" open-type="switchTab">
+						<image src="../../static/tabbar1.png" mode=""></image>
+						<text>首页</text>
+					</navigator>
 				</view>
 				<view class="bottomItemIndex">
-					<image src="../../static/tabbar3.png" mode=""></image>
-					<text>购物车</text>
+					<navigator url="../cart/cart" hover-class="none" open-type="switchTab">
+						<image src="../../static/tabbar3.png" mode=""></image>
+						<text>购物车</text>
+					</navigator>
 				</view>
 			</view>
-			<view class="bottomButton cartButton">
+			<view class="bottomButton cartButton" @click="showAttr(1)">
 				加入购物车
 			</view>
-			<view class="bottomButton buyButton">
+			<view class="bottomButton buyButton" @click="showAttr(2)">
 				立即购买
 			</view>
 		</view>
@@ -120,6 +124,7 @@
 		:price="detail.price"
 		:attr="detail.checkAttr"
 		:attrValue="detail.attr"
+		:type="type"
 		@close="closeAttr" v-if="attrFlag"></detailAttr>
 		
 		</view>
@@ -135,7 +140,8 @@
 				tab: 0,
 				serviceFlag: false, //服务弹窗的显示隐藏
 				attrFlag: false ,//属性弹窗的显示隐藏
-				detail: []
+				detail: [],
+				type:2 //1表示加入购物车，2表示立即购买
 			}
 		},
 		onLoad(option) {
@@ -159,7 +165,8 @@
 				this.serviceFlag = false;
 			},
 			//显示属性弹窗
-			showAttr(){
+			showAttr(type){
+				this.type = type;
 				this.attrFlag = true;
 			},
 			//关闭属性弹窗
