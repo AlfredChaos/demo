@@ -1,46 +1,27 @@
 <template>
 	<view>
-		<swiper class="detailSwiper" indicator-active-color="#0bc9fd" 
-		indicator-color="#b3b3b3" :indicator-dots="true" 
-		:autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/detail/dimg1.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/detail/dimg2.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/detail/dimg3.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/detail/dimg4.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-		</swiper>
+		<indexSwiper activeBtn="#0bc9fd" :content="detail.image" swiperHeight="525rpx"
+		width="470rpx" height="470rpx"></indexSwiper>
 		<view class="shopInfo">
 			<view class="shopTitle">
-				<label>新品</label>苹果（Apple）ipad2019新款第7代10.2英寸2018款9.7英寸air2更新版平板电脑 金色19款10.2英寸 32G WLAN版-标配
+				<label v-if="detail.tag==1">新品</label>
+				<label v-if="detail.tag==2">热销</label>
+				<label v-if="detail.tag==3">促销</label>
+				{{detail.title}}
 			</view>
 			<view class="shopSummary">
-				【11.11提前购，神券疯狂抢】平板抢券立减120元！下单抽万元豪礼~套餐晒图送蓝牙耳机~，每日0点、10点、15点、20点限量发券*点击抢券~
+				{{detail.summary}}
 			</view>
 			<view class="shopPriceSale">
-				<view class="shopPrice"><text>￥</text>799.00<label>￥599.00</label></view>
-				<view class="shopSale">月销量：5000件</view>
+				<view class="shopPrice"><text>￥</text>{{detail.price}}<label>￥{{detail.market_price}}</label></view>
+				<view class="shopSale">月销量：{{detail.sale}}件</view>
 			</view>
 			<view class="shopAssure" @click="showService">
-				<view class="shopAssureItem">
-					<i class="iconfont">&#xe60d;</i>全场包邮
-				</view>
-				<view class="shopAssureItem">
-					<i class="iconfont">&#xe60d;</i>7天无理由退货（激活后不支持）
+				<view class="shopAssureItem"
+				v-for="(item,index) in detail.servicelist" :key="index">
+				<template v-if="index<3">
+					<i class="iconfont">&#xe60d;</i>{{item.title}}
+				</template>
 				</view>
 				<view class="shopAssureMore">
 					<i class="iconfont">&#xe60b;</i>
@@ -48,7 +29,7 @@
 			</view>
 
 		</view>
-		<view class="shopAttr">
+		<view class="shopAttr" @click="showAttr">
 			<label>规格</label><text>请选择商品规格尺寸</text>
 			<i class="iconfont">&#xe60b;</i>
 		</view>
@@ -132,79 +113,38 @@
 			</view>
 		</view>
 		
-		<detailService @close="closeService" v-if="serviceFlag"></detailService>
+		<detailService :content="detail.servicelist" @close="closeService" v-if="serviceFlag"></detailService>
 		
-		<view class="attrDialog">
-			<view class="bg"></view>
-			<view class="attrDialogContent">
-				<view class="contentTop">
-					<image src="../../static/commodity/p1.png" mode=""></image>
-					<view class="contentTopText">
-						<text class="price">￥299.00</text>
-						<text class="attr">魅族16S PRO，黑色</text>
-					</view>
-					<i class="iconfont">&#xe62b;</i>
-				</view>
-				<view class="attrList">
-					<view class="attrItem">
-						<view class="attrItemTitle">
-							版本
-						</view>
-						<view class="attrItemValue">
-							<view class="attrValueItem activeAttr">
-								魅族16S Pro
-							</view>
-							<view class="attrValueItem">
-								魅族16S Plus
-							</view>
-						</view>
-					</view>
-					<view class="attrItem">
-						<view class="attrItemTitle">
-							颜色
-						</view>
-						<view class="attrItemValue">
-							<view class="attrValueItem activeAttr">
-								黑色
-							</view>
-							<view class="attrValueItem">
-								蓝色
-							</view>
-						</view>
-					</view>
-					<view class="attrItem">
-						<view class="attrItemTitle">
-							数量
-						</view>
-						<view class="attrItemValue">
-							<view class="shopNumber">
-								<view class="button">-</view>
-								<view><input type="text" value="1" /></view>
-								<view class="button">+</view>
-							</view>
-							<text class="stock">（库存：5件）</text>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="attrButton">
-				立即购买
-			</view>
+		<detailAttr 
+		:image="detail.mainimage"
+		:price="detail.price"
+		:attr="detail.checkAttr"
+		:attrValue="detail.attr"
+		@close="closeAttr" v-if="attrFlag"></detailAttr>
+		
 		</view>
-	</view>
 </template>
 
 <script>
+	import detailAttr from '../../pages/components/detailAttr.vue'
 	import detailService from '../components/detailService.vue'
+	import indexSwiper from '../components/indexSwiper.vue'
 	export default {
 		data() {
 			return {
 				tab: 0,
-				serviceFlag: false
+				serviceFlag: false, //服务弹窗的显示隐藏
+				attrFlag: false ,//属性弹窗的显示隐藏
+				detail: []
 			}
 		},
+		onLoad(option) {
+			this.getData(option.id)
+		},
 		components: {
-			detailService
+			detailAttr,
+			detailService,
+			indexSwiper
 		},
 		methods: {
 			tabChange(index){
@@ -217,6 +157,23 @@
 			// 关闭服务弹窗
 			closeService() {
 				this.serviceFlag = false;
+			},
+			//显示属性弹窗
+			showAttr(){
+				this.attrFlag = true;
+			},
+			//关闭属性弹窗
+			closeAttr(){
+				this.attrFlag = false;
+			},
+			getData(id){
+				uni.request({
+					url: this.$apiUrl+"index/detail/id/"+id,
+					success: (res) => {
+						console.log(res.data.data);
+						this.detail = res.data.data;
+					}
+				})
 			}
 		}
 	}
@@ -282,6 +239,7 @@
 		height: 80rpx;
 		align-items: center;
 		line-height: 80rpx;
+		overflow: hidden;
 	}
 	.shopAssureItem{
 		font-size: 24rpx;
@@ -292,6 +250,7 @@
 	.shopAssureItem i{
 		font-size: 30rpx;
 		color: #00c3f5;
+		margin-right: 5rpx;
 	}
 	.shopAssureMore{
 		float: right;
@@ -409,127 +368,4 @@
 		line-height: 100rpx;
 	}
 	
-	.attrDialog{
-		position: fixed;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-	}
-	.attrDialog .bg{
-		background: rgb(0, 0, 0, 0.5);
-		height: 100%;
-		width: 100%;
-	}
-	.attrDialogContent{
-		height: 1070rpx;
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		background: white;
-	}
-	.contentTop{
-		height: 200rpx;
-		position: relative;
-		border-bottom: 1rpx solid #e5e5e5;
-	}
-	.contentTop i{
-		position: absolute;
-		top: 25rpx;
-		right: 30rpx;
-	}
-	.contentTop image{
-		position: absolute;
-		top: -40rpx;
-		left: 30rpx;
-		width: 210rpx;
-		height: 210rpx;
-		background: white;
-		border: 1rpx solid #e5e5e5;
-	}
-	.contentTopText{
-		margin-left: 280rpx;
-	}
-	.contentTopText .price{
-		height: 44rpx;
-		color: #f0415f;
-		font-size: 36rpx;
-		display: block;
-		line-height: 44rpx;
-		padding-top: 24rpx;
-	}
-	.contentTopText .attr{
-		font-size: 24rpx;
-		color: #000000;
-		line-height: 40rpx;
-		height: 40rpx;
-	}
-	.attrList{
-		padding: 0 30rpx;
-	}
-	.attrItemTitle {
-		color: #999999;
-		line-height: 70rpx;
-		font-size: 28rpx;
-	}
-	.attrItem{
-		height: auto;
-		overflow: hidden;
-	}
-	.attrValueItem{
-		padding: 0 30rpx;
-		border: 1rpx solid #e5e5e5;
-		height: 70rpx;
-		line-height: 70rpx;
-		float: left;
-		font-size: 24rpx;
-		color: #666666;
-		margin-right: 30rpx;
-	}
-	.attrValueItem.activeAttr{
-		color: #00c3f5;
-		border-color: #00c3f5;
-	}
-	
-	.shopNumber{
-		width: 240rpx;
-		height: 70rpx;
-		line-height: 70rpx;
-		border: 1rpx solid #e5e5e5;
-		display: flex;
-		float: left;
-	}
-	.shopNumber .button{
-		width: 70rpx;
-		line-height: 70rpx;
-		text-align: center;
-	}
-	.shopNumber input{
-		flex: 1;
-		border-left: 1rpx solid #e5e5e5;
-		border-right: 1rpx solid #e5e5e5;
-		width: 100rpx;
-		height: 70rpx;
-		line-height: 70rpx;
-		font-size: 24rpx;
-		text-align: center;
-	}
-	.stock {
-		height: 70rpx;
-		line-height: 70rpx;
-		font-size: 24rpx;
-		color: #999999;
-		margin-left: 20rpx;
-	}
-	.attrButton{
-		height: 90rpx;
-		line-height: 90rpx;
-		position: absolute;
-		bottom: 0;
-		background: #0ebcef;
-		font-size: 28rpx;
-		width: 100%;
-		text-align: center;
-		color: white;
-	}
 </style>

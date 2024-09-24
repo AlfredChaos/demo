@@ -40,13 +40,6 @@
 			{
 				"navigationBarTitleText" : ""
 			}
-		},
-		{
-			"path" : "pages/components/detail/detail",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
-			}
 		}
 	],
 	"globalStyle": {

@@ -1,21 +1,29 @@
 <template>
 	<view class="shopList">
 		<view class="shopListItem" v-for="(item,index) in content" :key="index">
-			<image :src="this.$imgUrl+item.mainimage" class="shopImg" mode=""></image>
-			<view class="shopTitle">
-				{{item.smalltitle}}
-			</view>
-			<view class="shopActive">
-				<view class="shopActiveLab">
-					免息
+			<navigator hover-class="none" :url="'../detail/detail?id='+item.id">
+				<image :src="this.$imgUrl+item.mainimage" class="shopImg" mode=""></image>
+				<view class="shopTitle">
+					{{item.smalltitle}}
 				</view>
-				<view class="shopActiveText">
-					{{item.summary}}
+				<view class="shopActive">
+					<view class="shopActiveLab" v-if="item.tag==1">
+						免息
+					</view>
+					<view class="shopActiveLab" v-if="item.tag==2">
+						热销
+					</view>
+					<view class="shopActiveLab" v-if="item.tag==3">
+						促销
+					</view>
+					<view class="shopActiveText">
+						{{item.summary}}
+					</view>
 				</view>
-			</view>
-			<view class="shopPrice">
-				¥{{item.price}}
-			</view>
+				<view class="shopPrice">
+					¥{{item.price}}
+				</view>
+			</navigator>
 		</view>
 	</view>
 	

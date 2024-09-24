@@ -4,7 +4,8 @@
 		<!-- 顶部导航 -->
 		<topNavigation :content="recommend_cate"></topNavigation>
 		<!-- 首页轮播 -->
-		<indexSwiper :content="banner"></indexSwiper>
+		<indexSwiper activeBtn="#ffffff" :content="banner" swiperHeight="390rpx"
+		width="100%" height="390rpx"></indexSwiper>
 		<!-- 商品服务和商品导航 -->
 		<indexService :active="active" :icon="icon"></indexService>
 		<!-- 首页广告 -->
@@ -64,7 +65,7 @@
 				uni.request({
 					// mumu模拟器
 				    // url: 'http://192.168.5.9:80/mall/public/api/index', //仅为示例，并非真实接口地址。
-					url: 'http://www.mall.com/api/index',
+					url: this.$apiUrl+'index',
 				    success: (res) => {
 				        console.log(res.data.data);
 						var data = res.data.data;
@@ -90,7 +91,6 @@
 		width: 100%;
 	}
 	.adImage image{
-		height: 344rpx;
 		width: 100%;
 	}
 

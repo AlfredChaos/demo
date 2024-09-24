@@ -20,6 +20,7 @@ export function createApp() {
   // mumu模拟器
   // app.config.globalProperties.$imgUrl = "http://192.168.5.9:80/mall/public/uploads/"
   // 微信小程序
+  app.config.globalProperties.$apiUrl = "http://www.mall.com/api/"
   app.config.globalProperties.$imgUrl = "http://www.mall.com/uploads/"
   return {
     app

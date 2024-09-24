@@ -36,8 +36,10 @@
 						<view class="cateRightList">
 							<view class="cateRightItem"
 							v-for="(child,childIndex) in item.product" :key="childIndex">
-								<image :src="this.$imgUrl+child.mainimage" mode=""></image>
-								<text>{{child.smalltitle}}</text>
+								<navigator hover-class="none" :url="'../detail/detail?id='+child.id">
+									<image :src="this.$imgUrl+child.mainimage" mode=""></image>
+									<text>{{child.smalltitle}}</text>
+								</navigator>
 							</view>
 						</view>
 					</view>
@@ -73,7 +75,7 @@
 		methods: {
 			getData(){
 				uni.request({
-					url: "http://www.mall.com/api/index/cate",
+					url: this.$apiUrl+"index/cate",
 					success: res=>{
 						this.cate = res.data.data
 					}

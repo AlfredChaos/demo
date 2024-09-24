@@ -6,31 +6,14 @@
 					服务说明<i class="iconfont" @click="closeBtn">&#xe62b;</i>
 				</view>
 				<view class="serviceList">
-					<view class="serviceItem">
+					<view class="serviceItem" v-for="(item,index) in content" :key="index">
 						<view class="serviceItemTitle">
-							<i class="iconfont">&#xe8af;</i>
-							<text>花呗分期</text>
+							<!-- <i class="iconfont">&#xe8af;</i> -->
+							<image :src="this.$imgUrl+item.image" mode=""></image>
+							<text>{{item.title}}</text>
 						</view>
 						<view class="serviceItemContent">
-							花呗分期是由蚂蚁花呗联合魅族商城共同推出的“先购物后付款”的支付体验，支持预支蚂蚁花呗额度，免息期最长可达41天，可选择分3、6、12期还款。
-						</view>
-					</view>
-					<view class="serviceItem">
-						<view class="serviceItemTitle">
-							<i class="iconfont">&#xe8af;</i>
-							<text>花呗分期</text>
-						</view>
-						<view class="serviceItemContent">
-							花呗分期是由蚂蚁花呗联合魅族商城共同推出的“先购物后付款”的支付体验，支持预支蚂蚁花呗额度，免息期最长可达41天，可选择分3、6、12期还款。
-						</view>
-					</view>
-					<view class="serviceItem">
-						<view class="serviceItemTitle">
-							<i class="iconfont">&#xe8af;</i>
-							<text>花呗分期</text>
-						</view>
-						<view class="serviceItemContent">
-							花呗分期是由蚂蚁花呗联合魅族商城共同推出的“先购物后付款”的支付体验，支持预支蚂蚁花呗额度，免息期最长可达41天，可选择分3、6、12期还款。
+							{{item.summary}}
 						</view>
 					</view>
 				</view>
@@ -49,6 +32,7 @@
 				
 			}
 		},
+		props: ['content'],
 		methods: {
 			closeBtn() {
 				// 子组件向父组件传值
@@ -100,12 +84,20 @@
 	}
 	.serviceItemTitle{
 		line-height: 60rpx;
+		display: flex;
+		align-items: center;
 	}
 	.serviceItemTitle i{
 		margin-left: 20rpx;
 		margin-right: 10rpx;
 		color: #95e1df;
 		font-size: 24rpx;
+	}
+	.serviceItemTitle image{
+		width: 30rpx;
+		height: 30rpx;
+		margin-left: 20rpx;
+		margin-right: 10rpx;
 	}
 	.serviceItemTitle text{
 		font-size: 28rpx;
