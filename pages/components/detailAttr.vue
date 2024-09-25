@@ -60,9 +60,14 @@
 			}
 		},
 		mounted() {
-			for(var i=0; i<this.attr.length; i++){
-				this.valueIndex.push(0)
+			if(this.$store.state.attrValue.length == 0) {
+				for(var i=0; i<this.attr.length; i++){
+					this.valueIndex.push(0)
+				}
+			} else {
+				this.valueIndex = this.$store.state.attrValue
 			}
+			
 			this.checkAttr = this.getValue().toString();
 			this.getPrice(this.getValue());
 			
@@ -76,6 +81,10 @@
 		methods: {
 			closeDialog(){
 				this.$emit('close')
+				this.$store.commit('setAttr', {
+					"attrValue": this.valueIndex,
+					"attrText": this.checkAttr
+				})
 			},
 			attrCheck(index, childIndex){
 				this.valueIndex.splice(index, 1, childIndex);

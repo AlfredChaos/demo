@@ -1,4 +1,5 @@
 import App from './App'
+import store from './store'
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -7,6 +8,7 @@ Vue.config.productionTip = false
 // Vue.prototype.$imgUrl = "http://192.168.5.9:80/mall/public/uploads/"
 App.mpType = 'app'
 const app = new Vue({
+	store,
   ...App
 })
 app.$mount()
@@ -16,6 +18,7 @@ app.$mount()
 import { createSSRApp } from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
+  app.use(store)
   // 设置全局变量
   // mumu模拟器
   // app.config.globalProperties.$imgUrl = "http://192.168.5.9:80/mall/public/uploads/"
