@@ -30,7 +30,7 @@
 
 		</view>
 		<view class="shopAttr" @click="showAttr(2)">
-			<label>规格</label><text>请选择商品规格尺寸</text>
+			<label>规格</label><text>{{$store.state.attrText}}</text>
 			<i class="iconfont">&#xe60b;</i>
 		</view>
 		<view class="shopTable">
@@ -44,9 +44,11 @@
 			</view>
 		</view>
 		<view class="content" v-if="tab==0">
-			<image src="../../static/detail/d1.jpg" mode="widthFix"></image>
+			<!-- <image src="../../static/detail/d1.jpg" mode="widthFix"></image>
 			<image src="../../static/detail/d2.jpg" mode="widthFix"></image>
-			<image src="../../static/detail/d3.jpg" mode="widthFix"></image>
+			<image src="../../static/detail/d3.jpg" mode="widthFix"></image> -->
+			<parse :content="detail.content"
+			:imageProp="{'domain':'www.mall.com', 'mode': 'widthFix'}"></parse>
 		</view>
 		<view class="shopSpecs" v-if="tab==1">
 			<view class="specsTitle">
@@ -134,6 +136,7 @@
 	import detailAttr from '../../pages/components/detailAttr.vue'
 	import detailService from '../components/detailService.vue'
 	import indexSwiper from '../components/indexSwiper.vue'
+	import parse from '../components/gaoyia-parse/parse.vue'
 	export default {
 		data() {
 			return {
@@ -150,7 +153,8 @@
 		components: {
 			detailAttr,
 			detailService,
-			indexSwiper
+			indexSwiper,
+			parse
 		},
 		methods: {
 			tabChange(index){
