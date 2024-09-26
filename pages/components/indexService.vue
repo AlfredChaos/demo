@@ -2,7 +2,7 @@
 	<view class="service">
 		<view class="serviceItem" v-for="(item,index) in active" :key="index">
 			<image :src="this.$imgUrl+item.image" mode=""></image>
-			{{item.title}}
+			<text>{{item.title}}</text>
 		</view>
 	</view>
 	<view class="shopNav">
@@ -28,7 +28,7 @@
 		background: #f7f7f7;
 		/* 垂直居中 */
 		align-items: center;
-		justify-content: space-between;;
+		justify-content: space-between;
 	}
 	.serviceItem {
 		font-size: 24rpx;
@@ -36,13 +36,16 @@
 		line-height: 70rpx;
 		display: flex;
 		align-items: center;
-		margin-left: 20rpx;
+		margin-left: 15rpx;
 		margin-right: 20rpx;
 	}
 	.serviceItem image{
 		width: 35rpx;
 		height: 35rpx;
-		margin-right: 10rpx;
+		margin-right: 7rpx;
+	}
+	.serviceItem text{
+		white-space: nowrap
 	}
 	.shopNav {
 		height: 225rpx;

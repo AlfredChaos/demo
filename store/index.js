@@ -12,6 +12,10 @@ const store = new Vuex.Store({
 		setAttr(state, data){
 			state.attrValue = data.attrValue
 			state.attrText = data.attrText
+		},
+		defaultAttr(state){
+			state.attrValue = []
+			state.attrText = "请选择商品规格尺寸"
 		}
 	}
 })
@@ -28,6 +32,10 @@ const store = createStore({
 		setAttr(state, data){
 			state.attrValue = data.attrValue
 			state.attrText = data.attrText
+		},
+		defaultAttr(state){
+			state.attrValue = []
+			state.attrText = "请选择商品规格尺寸"
 		}
 	}
 })

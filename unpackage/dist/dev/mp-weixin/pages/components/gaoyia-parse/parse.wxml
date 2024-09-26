@@ -1,0 +1,1 @@
+<view class="{{['wxParse', c]}}" style="{{d}}"><block wx:if="{{a}}"><block wx:for="{{b}}" wx:for-item="node" wx:key="c"><weixin-parse-template wx:if="{{node.b}}" u-i="{{node.a}}" bind:__l="__l" u-p="{{node.b}}"/></block></block></view>

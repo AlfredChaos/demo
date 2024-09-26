@@ -23,7 +23,7 @@ const _sfc_main = {
   methods: {
     getData() {
       common_vendor.index.request({
-        url: "http://www.mall.com/api/index/cate",
+        url: this.$apiUrl + "index/cate",
         success: (res) => {
           this.cate = res.data.data;
         }
@@ -83,7 +83,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           return {
             a: this.$imgUrl + child.mainimage,
             b: common_vendor.t(child.smalltitle),
-            c: childIndex
+            c: "../detail/detail?id=" + child.id,
+            d: childIndex
           };
         }),
         c: index,

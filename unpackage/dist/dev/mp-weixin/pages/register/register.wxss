@@ -1,0 +1,53 @@
+
+.logo{
+		width: 250rpx;
+		height: 250rpx;
+		display: block;
+		margin: 70rpx auto 15rpx;
+}
+.formItem{
+		height: 74rpx;
+		padding-top: 36rpx;
+		border-bottom: 1rpx solid #e5e5e5;
+		margin: 0 100rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+}
+.formItem input{
+		font-size: 28rpx;
+}
+.getCode{
+		height: 60rpx;
+		width: 180rpx;
+		background: #f7f7f7;
+		color: #666666;
+		line-height: 60rpx;
+		font-size: 24rpx;
+		border: none;
+		text-align: center;
+}
+.getCode.activeCode{
+		background: #21bbef;
+		color: white
+}
+.registerBtn{
+		margin: 60rpx 100rpx 0;
+		height: 86rpx;
+		background: #23baef;
+		color: white;
+		text-align: center;
+		line-height: 86rpx;
+		font-size: 28rpx;
+}
+.loginText{
+		display: flex;
+		height: 120rpx;
+		justify-content: center;
+		align-items: center;
+		font-size: 24rpx;
+}
+.loginText navigator{
+		color: #23baef;
+		margin-left: 20rpx;
+}

@@ -1,0 +1,1 @@
+<view class="tablebox"><rich-text nodes="{{a}}" class="{{b}}" style="{{c}}"></rich-text></view>

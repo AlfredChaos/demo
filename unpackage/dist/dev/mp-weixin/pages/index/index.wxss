@@ -7,7 +7,6 @@ page{
 		width: 100%;
 }
 .adImage image{
-		height: 344rpx;
 		width: 100%;
 }
 

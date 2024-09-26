@@ -5,7 +5,8 @@
     "pages/components/mine/mine",
     "pages/cate/cate",
     "pages/detail/detail",
-    "pages/components/card/card"
+    "pages/components/card/card",
+    "pages/register/register"
   ],
   "window": {
     "navigationBarTextStyle": "black",

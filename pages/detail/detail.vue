@@ -44,9 +44,6 @@
 			</view>
 		</view>
 		<view class="content" v-if="tab==0">
-			<!-- <image src="../../static/detail/d1.jpg" mode="widthFix"></image>
-			<image src="../../static/detail/d2.jpg" mode="widthFix"></image>
-			<image src="../../static/detail/d3.jpg" mode="widthFix"></image> -->
 			<parse :content="detail.content"
 			:imageProp="{'domain':'www.mall.com', 'mode': 'widthFix'}"></parse>
 		</view>
@@ -54,48 +51,16 @@
 			<view class="specsTitle">
 				基础信息
 			</view>
-			<view class="specsContent">
+			<view class="specsContent" v-for="(item,index) in detail.spec" :key="index">
 				<view class="specsContentLeft">
-					品牌
+					{{item.specname}}
 				</view>
 				<view class="specsContentRight">
-					魅族
-				</view>
-			</view>
-			<view class="specsContent">
-				<view class="specsContentLeft">
-					品牌
-				</view>
-				<view class="specsContentRight">
-					魅族
-				</view>
-			</view>
-			<view class="specsContent">
-				<view class="specsContentLeft">
-					品牌
-				</view>
-				<view class="specsContentRight">
-					魅族
-				</view>
-			</view>
-			<view class="specsContent">
-				<view class="specsContentLeft">
-					品牌
-				</view>
-				<view class="specsContentRight">
-					魅族
-				</view>
-			</view>
-			<view class="specsContent">
-				<view class="specsContentLeft">
-					品牌
-				</view>
-				<view class="specsContentRight">
-					魅族
+					{{item.specvalue}}
 				</view>
 			</view>
 		</view>
-		<!-- <view style="height: 100rpx; width: 100%;"></view> -->
+		<view style="height: 100rpx; width: 100%;" v-if="tab==1"></view>
 		<view class="detailBottom">
 			<view class="bottomItem">
 				<view class="bottomItemIndex">
@@ -129,7 +94,7 @@
 		:type="type"
 		@close="closeAttr" v-if="attrFlag"></detailAttr>
 		
-		</view>
+	</view>
 </template>
 
 <script>
@@ -149,6 +114,9 @@
 		},
 		onLoad(option) {
 			this.getData(option.id)
+		},
+		onBackPress() {
+			this.$store.commit('defaultAttr')
 		},
 		components: {
 			detailAttr,
@@ -322,7 +290,7 @@
 		border-bottom: 1rpx solid #e9e9e9;
 	}
 	.specsContentLeft{
-		width: 110rpx;
+		width: 200rpx;
 		text-align: center;
 		font-size: 24rpx;
 		color: #999999;
