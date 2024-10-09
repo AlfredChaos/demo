@@ -3,19 +3,22 @@
 		<image src="../../static/logo.png" class="logo" mode=""></image>
 		<view class="formList">
 			<view class="formItem">
-				<input type="text" value="" placeholder="请输入手机号"/>
+				<input type="text" v-model="telphone"
+				 placeholder="请输入手机号"/>
 			</view>
 			<view class="formItem">
-				<input type="text" value="" placeholder="请输入验证码"/>
+				<input type="text" value="" placeholder="请输入验证码"
+				v-model="code"/>
 				<view class="getCode"
 				:class="{activeCode:codeFlag}"
 				@click="getCode"
 				>{{codeText}}</view>
 			</view>
 			<view class="formItem">
-				<input type="text" value="" placeholder="请输入密码"/>
+				<input type="text" v-model="password" 
+				placeholder="请输入密码"/>
 			</view>
-			<view class="registerBtn">
+			<view class="registerBtn" @click="register">
 				注册
 			</view>
 			<view class="loginText">
@@ -30,27 +33,77 @@
 		data() {
 			return {
 				codeText: "获取验证码",
-				codeFlag: true
+				codeFlag: true,
+				telphone: '',
+				password: '',
+				code: ''
 			}
 		},
 		methods: {
 			getCode(){
+				if(!this.check.telphone(this.telphone)){
+					return;
+				}
+				
 				if(this.codeFlag == false){
 					return;
 				}
-				this.codeFlag = false;
-				var time = 10;
-				this.codeText = "重新获取" + time;
-				var timer = setInterval(()=>{
-					if(time == 1){
-						this.codeText = "获取验证码";
-						this.codeFlag = true;
-						clearInterval(timer);
-					} else {
-						time--;
-						this.codeText = "重新获取" + time;
+				
+				this.sendMessage();
+			},
+			sendMessage(){
+				uni.request({
+					url: this.$apiUrl + "/index/getSmsCode",
+					method: "POST",
+					data: {
+						telphone: this.telphone
+					},
+					success: (res) => {
+						if(res.data.result!=0){
+							uni.showToast({
+								title: res.data.errmsg,
+								icon: 'none '
+							})
+						}else{
+							this.codeFlag = false;
+							var time = 10;
+							this.codeText = "重新获取" + time;
+							var timer = setInterval(()=>{
+								if(time == 1){
+									this.codeText = "获取验证码";
+									this.codeFlag = true;
+									clearInterval(timer);
+								} else {
+									time--;
+									this.codeText = "重新获取" + time;
+								}
+							}, 1000)
+						}
 					}
-				}, 1000)
+				})
+			},
+			register(){
+				if(!this.check.telphone(this.telphone)){
+					return;
+				}
+				if(!this.check.password(this.password)){
+					return;
+				}
+				if(!this.check.code(this.code)){
+					return;
+				}
+				uni.request({
+					url: this.$apiUrl + "/index/register",
+					method: "POST",
+					data: {
+						telphone: this.telphone,
+						password: this.password,
+						code: this.code
+					},
+					success: (res) => {
+						console.log(res)
+					}
+				})
 			}
 		}
 	}
