@@ -3,8 +3,8 @@
 		<view class="memberTop">
 			<image src="../../static/member/member-tx.png" class="avatar" mode=""></image>
 			<view class="userInfo">
-				<view class="loginRegister" style="display: none;">登录/注册</view>
-				<view class="loginInfo">
+				<view class="loginRegister" v-if="code==0">登录/注册</view>
+				<view class="loginInfo" v-else>
 					<text class="username">英特网络</text>
 					<text class="nickname">www.internal.com</text>
 				</view>
@@ -64,11 +64,27 @@
 	export default {
 		data() {
 			return {
-				
+				code: ''
 			}
 		},
+		onLoad() {
+			this.getData()
+		},
 		methods: {
-			
+			getData(){
+				uni.request({
+					url: this.$apiUrl + '/member/index',
+					method: 'POST',
+					header: {
+						'token': uni.getStorageSync('token'),
+					},
+					success(res)=>{
+						if(res.data.code == 0){
+							this.code = 0
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
