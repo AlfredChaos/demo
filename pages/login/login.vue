@@ -52,6 +52,9 @@
 							});
 						}else{
 							uni.setStorageSync('token', res.data.data.token);
+							uni.switchTab({
+								url: '../member/member'
+							})
 						}
 					}
 				})

@@ -1,12 +1,26 @@
 <template>
 	<view>
 		<view class="memberTop">
-			<image src="../../static/member/member-tx.png" class="avatar" mode=""></image>
+			<template v-if="!member.image">
+				<image src="../../static/member/empty-tx.png" class="avatar" mode=""></image>
+			</template>
+			<template v-else>
+				<image :src="member.image" class="avatar" mode=""></image>
+			</template>
 			<view class="userInfo">
-				<view class="loginRegister" v-if="code==0">登录/注册</view>
+				<view class="loginRegister" v-if="code==0">
+					<navigator url="../login/login" hover-class="none">
+						登录/注册
+					</navigator>
+				</view>
 				<view class="loginInfo" v-else>
-					<text class="username">英特网络</text>
-					<text class="nickname">www.internal.com</text>
+					<template v-if="member.nickname==''">
+						<text class="username">英特网络</text>
+					</template>
+					<template v-else>
+						<text class="username">{{ member.nickname }}</text>
+					</template>
+					<text class="nickname">{{ member.telphone }}</text>
 				</view>
 			</view>
 			<view class="ewm">
@@ -64,7 +78,8 @@
 	export default {
 		data() {
 			return {
-				code: ''
+				code: '',
+				member: []
 			}
 		},
 		onLoad() {
@@ -78,9 +93,40 @@
 					header: {
 						'token': uni.getStorageSync('token'),
 					},
-					success(res)=>{
+					success:(res)=>{
+						// 未登录
 						if(res.data.code == 0){
 							this.code = 0
+						}
+						// 获取用户信息成功
+						if(res.data.code == 1){
+							this.code = 1;
+							this.member = res.data.data
+						}
+						// token过期,刷新token
+						if(res.data.code == 2){
+							uni.setStorageSync('token')
+							uni.request({
+								url: this.$apiUrl + '/member/index',
+								method: 'POST',
+								header: {
+									'token': uni.getStorageSync('token'),
+								},
+								success: (res) => {
+									this.code = 1;
+									this.member = res.data.data
+								}
+							})
+						}
+						// token失效,重新登录
+						if(res.data.code == 3){
+							this.code = 0;
+							uni.setStorageSync("token", '')
+						}
+						// token有效,但没有相关用户
+						if(res.data.code == 4){
+							this.code = 0;
+							uni.setStorageSync("token", '')
 						}
 					}
 				})
