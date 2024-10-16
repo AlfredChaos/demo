@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		attrValue: [], //detailAttr valueIndex [0,0]
-		attrText: '请选择商品规格尺寸'
+		attrText: '请选择商品规格尺寸',
+		isLogin: 0
 	},
 	mutations: {
 		setAttr(state, data){
@@ -16,6 +17,13 @@ const store = new Vuex.Store({
 		defaultAttr(state){
 			state.attrValue = []
 			state.attrText = "请选择商品规格尺寸"
+		},
+		login(state){
+			state.isLogin = 1;
+		},
+		logout(state){
+			state.isLogin = 0;
+			uni.setStorageSync('token', '');
 		}
 	}
 })
@@ -26,7 +34,8 @@ import { createStore } from 'vuex'
 const store = createStore({
 	state: {
 		attrValue: [], //detailAttr valueIndex [0,0]
-		attrText: '请选择商品规格尺寸'
+		attrText: '请选择商品规格尺寸',
+		isLogin: 0
 	},
 	mutations: {
 		setAttr(state, data){
@@ -36,6 +45,13 @@ const store = createStore({
 		defaultAttr(state){
 			state.attrValue = []
 			state.attrText = "请选择商品规格尺寸"
+		},
+		login(state){
+			state.isLogin = 1;
+		},
+		logout(state){
+			state.isLogin = 0;
+			uni.setStorageSync('token', '')
 		}
 	}
 })

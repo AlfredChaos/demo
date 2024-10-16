@@ -14,12 +14,6 @@
 			}
 		},
 		{
-			"path": "pages/components/mine/mine",
-			"style": {
-				"navigationBarTitleText": "mine"
-			}
-		},
-		{
 			"path" : "pages/cate/cate",
 			"style" : 
 			{
@@ -61,6 +55,27 @@
 			"style" : 
 			{
 				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/address/list",
+			"style" : 
+			{
+				"navigationBarTitleText" : "地址管理"
+			}
+		},
+		{
+			"path" : "pages/address/add",
+			"style" : 
+			{
+				"navigationBarTitleText" : "添加地址"
+			}
+		},
+		{
+			"path" : "pages/address/edit",
+			"style" : 
+			{
+				"navigationBarTitleText" : "编辑地址"
 			}
 		}
 	],
