@@ -4,20 +4,20 @@
 			<view class="itemTitle">
 				收货人:
 			</view>
-			<input type="text" v-model="username" placeholder="收货人姓名"/>
+			<input type="text" value="" placeholder="收货人姓名"/>
 		</view>
 		<view class="addressItem">
 			<view class="itemTitle">
 				
 			</view>
-			<text :class="{sexActive:sex==0}" @click="sexChange(0)">先生</text>
-			<text :class="{sexActive:sex==1}" @click="sexChange(1)">女士</text>
+			<text>先生</text>
+			<text>女士</text>
 		</view>
 		<view class="addressItem">
 			<view class="itemTitle">
 				电话号码:
 			</view>
-			<input type="text" v-model="telphone" placeholder="收货人的联系电话"/>
+			<input type="text" value="" placeholder="收货人的联系电话"/>
 		</view>
 		<view class="addressItem">
 			<view class="itemTitle">
@@ -32,15 +32,15 @@
 			<view class="itemTitle">
 				详细地址:
 			</view>
-			<textarea v-model="address" placeholder="请输入详细地址"></textarea>
+			<textarea value="" placeholder="请输入详细地址"></textarea>
 		</view>
 		<view class="defaultItem">
 			<view class="itemTitle">
 				默认地址:
 			</view>
-			<switch @change="defaultChange" checked="true" color="#0bbbef" style="transform:scale(0.8);" />
+			<switch checked="true" color="#0bbbef"; style="transform:scale(0.8);"></switch>
 		</view>
-		<view class="saveAddress" @click="addAddress">
+		<view class="saveAddress">
 			保存收货地址
 		</view>
 	</view>
@@ -55,45 +55,17 @@
 		data() {
 			return {
 				city: '请选择收货地址',
-				username: "",
-				telphone: '',
-				address: '',
-				default: 1,
-				sex: 0
+				title: 'Hello'
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			defaultChange: function(e){
-				if(e.detail.value == true){
-					this.default = 1
-				} else {
-					this.default = 0
-				}
-				console.log(this.default)
-			},
 			change(data) {
 				this.city = data.data.join('')
-			},
-			addAddress(){
-				this.$request(this.$apiUrl + '/member/addressadd', {
-					'username': this.username,
-					'telphone': this.telphone,
-					'city': this.city,
-					'address': this.address,
-					default: this.default, // 0表示不默认，1表示默认 
-					sex: this.sex // 0表示先生，1表示女士
-				})
-				.then(res=>{
-					console.log(res)
-				})
-			},
-			sexChange(index){
-				this.sex = index
 			}
-		},
+		}
 	}
 </script>
 
@@ -132,11 +104,6 @@
 		text-align: center;
 		margin-right: 10rpx;
 		color: #999999;
-	}
-	.addressItem text.sexActive{
-		background: #0bbbef;
-		color: white;
-		border: none;
 	}
 	.addressItem input {
 		font-size: 28rpx;

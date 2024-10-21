@@ -28,7 +28,7 @@ export function createApp() {
   app.config.globalProperties.$apiUrl = "http://www.mall.com/api/"
   app.config.globalProperties.$imgUrl = "http://www.mall.com/uploads/"
   app.config.globalProperties.check = check;
-  app.config.globalProperties.$request = function(url){
+  app.config.globalProperties.$request = function(url, data=''){
 	  return new Promise((reslove, reject)=>{
 		  uni.request({
 		  	url: url,
@@ -36,6 +36,7 @@ export function createApp() {
 		  	header: {
 		  		'token': uni.getStorageSync('token')
 		  	},
+			data: data,
 		  	success:(res)=>{
 		  		// 未登录
 		  		if(res.data.code == 0){
