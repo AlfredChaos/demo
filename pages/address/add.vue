@@ -23,9 +23,8 @@
 			<view class="itemTitle">
 				收获地址:
 			</view>
-			<!-- <input type="text" value="" placeholder="请选择收货地址"/> -->
 			<view class="content">
-				<pickerAddress class="city" @change="change">{{city}}</pickerAddress>
+				<pickerAddress class="city" @change="changeLocation">{{city}}</pickerAddress>
 			</view>
 		</view>
 		<view class="addressBox">
@@ -49,41 +48,54 @@
 <script>
 	import pickerAddress from '../../components/pickerAddress/pickerAddress.vue'
 	export default{
-		components:{
-			pickerAddress
-		},
 		data() {
 			return {
 				city: '请选择收货地址',
 				username: "",
 				telphone: '',
 				address: '',
-				default: 1,
+				defaultAddress: 1,
 				sex: 0
 			}
 		},
-		onLoad() {
-
+		components:{
+			pickerAddress
 		},
 		methods: {
 			defaultChange: function(e){
 				if(e.detail.value == true){
-					this.default = 1
+					this.defaultAddress = 1
 				} else {
-					this.default = 0
+					this.defaultAddress = 0
 				}
-				console.log(this.default)
+				console.log(this.defaultAddress)
 			},
-			change(data) {
-				this.city = data.data.join('')
+			changeLocation(location) {
+				if (location.data){
+					this.city = location.data.join('')
+				}
 			},
 			addAddress(){
+				// 验证表单
+				if(!this.check.username(this.username)){
+					return;
+				}
+				if(!this.check.telphone(this.telphone)){
+					return;
+				}
+				if(!this.check.city(this.city)){
+					return;
+				}
+				if(!this.check.address(this.address)){
+					return;
+				}
+				
 				this.$request(this.$apiUrl + '/member/addressadd', {
 					'username': this.username,
 					'telphone': this.telphone,
 					'city': this.city,
 					'address': this.address,
-					default: this.default, // 0表示不默认，1表示默认 
+					defaultAddress: this.default, // 0表示不默认，1表示默认 
 					sex: this.sex // 0表示先生，1表示女士
 				})
 				.then(res=>{
@@ -170,7 +182,7 @@
 	}
 	.city{
 		font-size: 28rpx;
-		color: black;
+		color: #000000;
 	}
 	.defaultItem{
 		margin: 0 30rpx;

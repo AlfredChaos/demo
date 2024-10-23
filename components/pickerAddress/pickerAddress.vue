@@ -24,7 +24,7 @@
 			initSelect() {
 				this.updateSourceDate() // 更新源数据
 				.updateAddressDate() // 更新结果数据
-				.$forceUpdate()  // 触发双向绑定
+				// .$forceUpdate()  // 触发双向绑定
 			},
 			// 地址控件改变控件
 			columnchange(d) {
@@ -38,7 +38,7 @@
 			 * 更新源数据
 			 * */
 			updateSourceDate() {
-				this.array = []
+				this.array = [];
 				this.array[0] = AllAddress.map(obj => {
 					return {
 						name: obj.provinceName
@@ -80,7 +80,7 @@
 			updateAddressDate() {
 				selectVal[0] = this.array[0][this.value[0]].name
 				selectVal[1] = this.array[1][this.value[1]].name 
-				selectVal[2] = this.array[2][this.value[2]].name 
+				selectVal[2] = this.array[2][this.value[2]].name
 				return this
 			},
 			

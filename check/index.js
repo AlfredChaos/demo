@@ -28,6 +28,36 @@ const check={
 			return false;
 		}
 		return true;
+	},
+	username(data){
+		if(data == ''){
+			uni.showToast({
+				title: "用户姓名不能为空",
+				icon: 'none'
+			})
+			return false;
+		}
+		return true;
+	},
+	city(data){
+		if(data == '' || data == '请选择收货地址'){
+			uni.showToast({
+				title: "请选择收货地址",
+				icon: 'none'
+			})
+			return false;
+		}
+		return true;
+	},
+	address(data){
+		if(data == ''){
+			uni.showToast({
+				title: "请选择详细地址",
+				icon: 'none'
+			})
+			return false;
+		}
+		return true;
 	}
 }
 export default check;

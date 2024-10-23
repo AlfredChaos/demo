@@ -1,23 +1,28 @@
 <template>
-	<view class="">
-		<view class="addressList">
+	<view class="" v-if="show">
+		<view class="addressList" v-if="addressList && addressList.length>0">
 			<uni-swipe-action>
-				<uni-swipe-action-item :right-options="options" @click="onClick" @change="swipeChange($event, 0)">
+				<uni-swipe-action-item :right-options="options" @click="onClick($event, index, item.id)" @change="swipeChange($event, 0)"
+				v-for="(item,index) in addressList" :key="index">
 					<view class="addressItem">
 						<view class="addressMain">
-							<text class="username">Alfred</text>
-							<text class="telphone">18888888888</text>
-							<text class="default">默认</text>
+							<text class="username">{{item.username}}</text>
+							<text class="telphone">{{item.telphone}}</text>
+							<text class="default" v-if="item.default==1">默认</text>
 						</view>
 						<view class="addressInfo">
-							广东省深圳市广东省深圳市广东省深圳市广东省深圳市广东省深圳市广东省深圳市广东省深圳市
+							{{item.city}}{{item.address}}
 						</view>
 					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
 		</view>
+		<view class="empty" v-else>
+			<image src="../../static/address.png" mode=""></image>
+			<text>用户没有收货地址，请添加</text>
+		</view>
 		<view style="height: 90rpx;"></view>
-		<view class="addBtn">
+		<view class="addBtn" @click="addUrl">
 			添加新地址
 		</view>
 	</view>
@@ -33,6 +38,8 @@
 		},
 		data(){
 			return{
+				show: false,
+				addressList: [],
 				options: [{
 					text: '删除',
 					style: {
@@ -46,8 +53,36 @@
 				}]
 			}
 		},
+		onLoad(){
+			this.getData()
+		},
 		methods: {
-			onClick(e) {
+			onClick(e, index, id) {
+				if(e.content.text == "删除"){
+					console.log(index, e.content.text);
+					uni.showModal({
+						title: '提示',
+						content: '是否要删除对应数据',
+						success: res=> {
+							if (res.confirm) {
+								this.addressList.splice(index, 1);
+								this.$request(this.$apiUrl + '/member/addressDel', {
+									id: id
+								}).then(res=>{
+									console.log(res);
+								})
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					})
+				}
+				if(e.content.text == "编辑"){
+					uni.navigateTo({
+						url: "edit?id=" + id
+					})
+				}
+				
 				console.log('点击了' + (e.position === 'left' ? '左侧' : '右侧') + e.content.text + '按钮')
 			},
 			change(event) {
@@ -55,15 +90,41 @@
 			},
 			swipeChange(e, index) {
 				console.log('当前状态：' + e + '，下标：' + index)
+			},
+			addUrl(){
+				uni.navigateTo({
+					url: "add"
+				})
+			},
+			getData(){
+				this.$request(this.$apiUrl + "/member/addressList")
+				.then(res=>{
+					this.addressList = res.data;
+					this.show = true;
+				})
 			}
 		}
 	}
 </script>
 
 <style>
+	.empty image{
+		width: 330rpx;
+		height: 210rpx;
+		display: block;
+		margin: 200rpx auto 0;
+	}
+	.empty text{
+		font-size: 24rpx;
+		color: #999999;
+		line-height: 80rpx;
+		text-align: center;
+		display: block;
+	}
 	.addressItem{
 		padding: 0 35rpx;
 		border-bottom: 1rpx solid #e5e5e5;
+		width: 100%;
 	}
 	.addressMain{
 		line-height: 40rpx;
