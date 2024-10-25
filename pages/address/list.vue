@@ -29,8 +29,8 @@
 </template>
 
 <script>
-	import uniSwipeAction from '../../pages/components/uni-swipe-action/uni-swipe-action.vue'
-	import uniSwipeActionItem from '../../pages/components/uni-swipe-action-item/uni-swipe-action-item.vue'
+	import uniSwipeAction from '../components/uni-swipe-action/uni-swipe-action.vue'
+	import uniSwipeActionItem from '../components/uni-swipe-action-item/uni-swipe-action-item.vue'
 	export default{
 		components: {
 			uniSwipeAction,

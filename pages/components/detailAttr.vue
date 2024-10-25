@@ -40,7 +40,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="attrButton">
+		<view class="attrButton" @click="attrButton">
 			{{buttonText}}
 		</view>
 	</view>
@@ -56,7 +56,8 @@
 				currentPrice: '',
 				stock: '',
 				number: 1,
-				buttonText: ""
+				buttonText: "",
+				attrid: ''
 			}
 		},
 		mounted() {
@@ -99,8 +100,9 @@
 						temp.push(this.attrValue[i]);
 					}
 				}
-				this.currentPrice = temp[0].price
-				this.stock = temp[0].stock
+				this.currentPrice = temp[0].price;
+				this.stock = temp[0].stock;
+				this.attrid = temp[0].id
 			},
 			getValue(){
 				var temp = [];
@@ -124,6 +126,25 @@
 					return;
 				}
 				this.number++
+			},
+			attrButton(){
+			
+				if(this.type == 1){
+					//跳转到购物车
+					this.$back('../cart/cart', 2);
+					this.$request(this.$apiUrl + '/member/addcart', {
+						"num": this.number,
+						"attrid": this.attrid
+					}).then(res=>{
+						console.log(res)
+					})
+				}
+				if(this.type == 2){
+					//跳转到订单
+					var orderShop = [{"num": this.number, "attrid": this.attrid}];
+					uni.setStorageSync("orderShop", JSON.stringify(orderShop));
+					this.$back('../order/order')
+				}
 			}
 		}
 	}

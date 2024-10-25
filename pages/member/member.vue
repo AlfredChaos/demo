@@ -51,7 +51,7 @@
 		</view>
 		<view class="splitLine"></view>
 		<view class="menuList">
-			<view class="menuItem">
+			<view class="menuItem" @click="herf('../address/list')">
 				<image src="../../static/member/member-menu1.png" mode=""></image>
 				<text>收货地址</text>
 			</view>
@@ -85,6 +85,9 @@
 			this.getData()
 		},
 		methods: {
+			herf(url){
+				this.$href(url)
+			},
 			logout(){
 				this.$store.commit('logout')
 			},

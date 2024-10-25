@@ -28,6 +28,10 @@
 				password: ''
 			}
 		},
+		onLoad(option){
+			console.log(option);
+			this.backurl = option.backurl
+		},
 		methods: {
 			login(){
 				if(!this.check.telphone(this.telphone)){
@@ -52,9 +56,23 @@
 							});
 						}else{
 							uni.setStorageSync('token', res.data.data.token);
-							uni.switchTab({
-								url: '../member/member'
-							})
+							
+							if(this.backurl == '' || !this.backurl){
+								uni.switchTab({
+									url: '../member/member'
+								})
+							} else {
+								if(this.backurl == 1){
+									uni.navigateBack({
+										delta: 1
+									})
+								} else {
+									uni.navigateTo({
+										url: this.backurl
+									})
+								}
+							}
+							
 						}
 					}
 				})
