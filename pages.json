@@ -76,7 +76,7 @@
 			"path" : "pages/order/order",
 			"style" : 
 			{
-				"navigationBarTitleText" : "订单详情"
+				"navigationBarTitleText" : "购买页面"
 			}
 		},
 		{
@@ -84,6 +84,13 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "购物车"
+			}
+		},
+		{
+			"path" : "pages/order/pay",
+			"style" : 
+			{
+				"navigationBarTitleText" : "支付订单"
 			}
 		}
 	],
